@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import styles from './index.module.css';
 
 export function Index() {
@@ -16,7 +17,9 @@ export function Index() {
               Welcome demo 👋
             </h1>
           </div>
-
+          <div>
+            <Image src={'/NINJA.jpg'} alt={'ninja'} width='100' height='100' />
+          </div>
           <div id="hero" className="rounded">
             <div className="text-container">
               <h2>

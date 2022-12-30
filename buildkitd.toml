@@ -1,0 +1,3 @@
+[registry."registry.seyan"]
+  http = true
+  insecure = true

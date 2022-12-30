@@ -57,6 +57,13 @@
       "options": {
         "lintFilePatterns": ["apps/demo/**/*.{ts,tsx,js,jsx}"]
       }
+    },
+    "deploy": {
+      "executor": "nx:run-commands",
+      "outputs": [],
+      "options": {
+        "command": "cd dist/apps/demo && cp ../../../apps/demo/Dockerfile . "
+      }
     }
   },
   "tags": []
