@@ -1,12 +1,13 @@
 # Goals
 - Illustrate build / export with next.js and image management
 
-This is a defualt next.js project that adds an image (jpg or png) to display.
+This is a default next.js project that adds an image (jpg or png) to display.
 The image will prevent the export regular export process and will need additional optimization.
 
 ## Setup
 
 ```bash
+yarn nx build
 docker build -f ./apps/demo/Dockerfile . -t demo
 docker images | grep demo
 docker run -p 3000:3000 demo
@@ -31,9 +32,7 @@ curl -X GET http://registry.seyan/v2/_catalog
 ```bash
 cd helm
 # then deploy the chart
-helm install demo-chart demo/ --values demo/values.yaml
-# edit values again, then upgrade the chart
-helm upgrade demo-chart demo/ --values demo/values.yaml    
+helm upgrade --install demo-chart demo/ --values demo/values.yaml
 # once done, delete the chart
 helm delete demo-chart
 ```
