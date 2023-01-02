@@ -9,15 +9,15 @@ RUN apk add --no-cache --virtual .gyp \
   && yarn \
   && apk del .gyp
 
-# # Rebuild the source code only when needed
-# FROM node:16-alpine AS builder
-# WORKDIR /app
-# COPY --from=deps /app/node_modules ./node_modules
-# # .next folder contains everything necessary to start
-# COPY ./dist/apps/demo/* ./
+# Rebuild the source code only when needed
+FROM node:16-alpine AS builder
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
+# .next folder contains everything necessary to start
+COPY ./dist/apps/demo/* ./
 
-# ENV NEXT_TELEMETRY_DISABLED 1
-# RUN yarn build
+ENV NEXT_TELEMETRY_DISABLED 1
+RUN yarn build
 
 # Production image, copy all the files and run next
 FROM node:16-alpine AS runner
@@ -26,12 +26,13 @@ WORKDIR /app
 ENV NODE_ENV production
 ENV NEXT_TELEMETRY_DISABLED 1
 
-COPY --from=deps /app/node_modules ./node_modules
+# COPY --from=deps /app/node_modules ./node_modules
 # Automatically leverage output traces to reduce image size
 # https://nextjs.org/docs/advanced-features/output-file-tracing
-# COPY --from=builder  /app/.next/standalone ./
-# COPY --from=builder  /app/.next/static ./.next/static
-COPY ./dist/apps/demo/.next ./.next
+COPY --from=builder  /app/.next ./
+COPY --from=builder  /app/node_modules ./node_modules
+
+# COPY ./dist/apps/demo/.next ./.next
 COPY ./dist/apps/demo/public ./public
 COPY ./dist/apps/demo/next.config.js ./
 COPY ./dist/apps/demo/package.json ./
