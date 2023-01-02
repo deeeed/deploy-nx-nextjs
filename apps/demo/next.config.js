@@ -15,9 +15,9 @@ const nextConfig = {
   },
   experimental:{
     // See: https://github.com/nrwl/nx/issues/9017
-    outputFileTracingRoot: path.join(__dirname, '../../'),
+    // outputFileTracingRoot: path.join(__dirname, '../../'),
   },
-  output:"standalone"
+  // output:"standalone"
 };
 
 module.exports = withNx(nextConfig);
