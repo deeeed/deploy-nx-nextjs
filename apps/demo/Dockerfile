@@ -9,6 +9,11 @@ RUN apk add --no-cache --virtual .gyp \
   && yarn \
   && apk del .gyp
 
+###############################
+### NOT COMPATILBLE WITH NX ###
+###############################
+# Left commented out but can be used on non-nx project.
+
 # # Rebuild the source code only when needed
 # FROM node:16-alpine AS builder
 # WORKDIR /app
